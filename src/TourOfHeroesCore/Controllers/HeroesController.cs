@@ -30,6 +30,7 @@ namespace TourOfHeroesCore.Controllers
 
         // GET: api/Heroes/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Hero), 200)]
         public async Task<IActionResult> GetHero([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -49,6 +50,7 @@ namespace TourOfHeroesCore.Controllers
 
         // PUT: api/Heroes/5
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(Hero), 200)]
         public async Task<IActionResult> PutHero([FromRoute] int id, [FromBody] Hero hero)
         {
             if (!ModelState.IsValid)
@@ -84,6 +86,7 @@ namespace TourOfHeroesCore.Controllers
 
         // POST: api/Heroes
         [HttpPost]
+        [ProducesResponseType(typeof(Hero), 201)]
         public async Task<IActionResult> PostHero([FromBody] Hero hero)
         {
             if (!ModelState.IsValid)
@@ -99,6 +102,7 @@ namespace TourOfHeroesCore.Controllers
 
         // DELETE: api/Heroes/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Hero), 200)]
         public async Task<IActionResult> DeleteHero([FromRoute] int id)
         {
             if (!ModelState.IsValid)
