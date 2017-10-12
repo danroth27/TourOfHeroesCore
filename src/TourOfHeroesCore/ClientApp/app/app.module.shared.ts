@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HeroService } from './services/hero.service';
+import { HeroClientService } from './services/hero-client.service';
 
 import { AppComponent } from './components/app/app.component';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
@@ -29,7 +30,10 @@ import { HeroSearchComponent } from './components/hero-search/hero-search.compon
         FormsModule,
         AppRoutingModule
     ],
-    providers: [HeroService]
+    providers: [
+      HeroService,
+      HeroClientService
+    ]
 })
 export class AppModuleShared {
 }

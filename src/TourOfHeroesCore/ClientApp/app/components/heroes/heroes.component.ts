@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Hero } from '../../models/hero';
+import { Hero } from '../../services/hero-client.service';
 import { HeroService } from '../../services/hero.service';
 import { OnInit } from '@angular/core';
    
@@ -31,7 +31,7 @@ export class HeroesComponent implements OnInit {
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedHero!.id]);
+    this.router.navigate(['/detail', this.selectedHero!.id as number]);
   }
 
   add(name: string): void {
@@ -45,7 +45,7 @@ export class HeroesComponent implements OnInit {
   }
 
   delete(hero: Hero): void {
-    this.heroService.delete(hero.id)
+    this.heroService.delete(hero.id as number)
         .subscribe(() => {
           this.heroes = this.heroes.filter(h => h !== hero);
           if (this.selectedHero === hero) { this.selectedHero = null; }

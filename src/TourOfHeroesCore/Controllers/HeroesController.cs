@@ -21,7 +21,7 @@ namespace TourOfHeroesCore.Controllers
 
         // GET: api/Heroes
         [HttpGet]
-        public IEnumerable<Hero> GetHeroes(string name)
+        public IEnumerable<Hero> GetHeroes([FromQuery] string name)
         {
             return !String.IsNullOrEmpty(name) ?
                 _context.Heroes.Where(hero => hero.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0) :
