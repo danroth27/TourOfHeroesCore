@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace TourOfHeroesCore
 {
@@ -26,6 +27,9 @@ namespace TourOfHeroesCore
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<HeroesContext>(options =>
+                    options.UseSqlite(Configuration.GetConnectionString("HeroesContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,8 +71,8 @@ namespace TourOfHeroesCore
 
                 if (env.IsDevelopment())
                 {
-                    //spa.UseAngularCliServer(npmScript: "start");
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }
