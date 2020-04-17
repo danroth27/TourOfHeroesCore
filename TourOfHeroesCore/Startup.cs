@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 
 namespace TourOfHeroesCore
 {
@@ -28,8 +30,16 @@ namespace TourOfHeroesCore
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            //services.AddDbContext<HeroesContext>(options =>
+            //        options.UseInMemoryDatabase("Heroes"));
+
             services.AddDbContext<HeroesContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("HeroesContext")));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +62,13 @@ namespace TourOfHeroesCore
             {
                 app.UseSpaStaticFiles();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseRouting();
 
